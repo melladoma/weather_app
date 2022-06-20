@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
     <script src="https://kit.fontawesome.com/a667625290.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
     <title>WeatherApp</title>
 </head>
 <body>
@@ -21,12 +21,10 @@
 
    <!-- GRID -->
 
-  
-
    <div class="container d-flex justify-content-center flex-column w-100">
     <div class="row col-12 col-lg-6 mb-3 offset-lg-6">
-        <form action="" class="input-group">
-            <input type="text" class="form-control" placeholder="enter city name">
+        <form action="/add-city" method="post" class="input-group">
+            <input type="text" class="form-control" placeholder="enter city name" name="city">
             <button class="btn btn-warning">Add</button>
            </form>
 
@@ -35,7 +33,7 @@
         
             <div class="row col-12 col-lg-6 mb-3 w-100">
                 <div class="col col-12 col-lg-6 mb-3">
-                    <img class="col w-100" src="./images/map.png" alt="carte">
+                    <img class="col w-100" src="/images/map.png" alt="carte">
 
                 </div>
         
@@ -44,36 +42,35 @@
                         <p class="d-inline-block">Update cities</p>
                         <i class="fa-solid fa-rotate"></i>
                     </div>
+
                     <ul class="list-group w-100">
-                        <li class="list-group-item d-flex justify-content-between pt-3 pb-2">
+
+                        <% if(typeof cityList !== "undefined" && cityList.length > 0 ) {%>
+
+                        <% for(let i=0; i<cityList.length ;i++){ %>
+                        <li class="list-group-item d-flex justify-content-between p-3">
                             <div class="ms-2 text-start">
-                                <div class="fw-bold">Paris</div>
+                                <div class="fw-bold"> <%= cityList[i].name %> </div>
                             </div>
-                            <div class="ms-2 text-center">
-                                <p class="d-inline-block">nuageux</p>
-                                <i class="fa-solid fa-cloud"></i>
-                                <span class="badge bg-warning rounded-pill">7.22°C</span>
-                                <span class="badge bg-secondary rounded-pill">5.56°C</span>
+                            <div class="ms-2 d-flex justify-content-between align-items-center mw-50 gap-3">
+                                <p class="d-inline-block m-0"><%= cityList[i].info %> </p>
+                                <i class="<%= cityList[i].icon %>" ></i> 
+                                <span class="badge bg-warning rounded-pill"><%= cityList[i].tmax %> °C</span>
+                                <span class="badge bg-secondary rounded-pill"><%= cityList[i].tmin %> °C</span>
                             </div>
                             <div class="ms-2 text-end">
-                                <i class="fa-regular fa-circle-xmark text-warning"></i>
+                                <a href="/delete-city?index=<%=i%>"> <i class="fa-regular fa-circle-xmark text-warning"></i> </a>
                             </div>
                         </li>
 
-                       <li class="list-group-item d-flex justify-content-between pt-3 pb-2">
-                            <div class="ms-2 text-start">
-                                <div class="fw-bold">Lyon</div>
-                            </div>
-                            <div class="ms-2 text-center">
-                                <p class="d-inline-block">ciel dégagé</p>
-                                <i class="fa-solid fa-sun"></i>
-                                <span class="badge bg-warning rounded-pill">7.22°C</span>
-                                <span class="badge bg-secondary rounded-pill">5.56°C</span>
-                            </div>
-                            <div class="ms-2 text-end">
-                                <i class="fa-regular fa-circle-xmark text-warning"></i>
-                            </div>
-                        </li>
+                    <%}%>
+                    <%}%>
+                     <%if(cityList.length === 0 ){%>
+                        <div class="text-center">
+                            <h6>No cities found</h6>
+                        </div>
+                        <%}%>
+                      
                     </ul>
             
             </div>
