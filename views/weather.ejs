@@ -20,65 +20,69 @@
 
 
    <!-- GRID -->
-
+    <!-- attention normalement class col pas sur meme class que row -->
    <div class="container d-flex justify-content-center flex-column w-100">
-    <div class="row col-12 col-lg-6 mb-3 offset-lg-6">
-        <form action="/add-city" method="post" class="input-group">
-            <input type="text" class="form-control" placeholder="enter city name" name="city">
-            <button class="btn btn-warning">Add</button>
-           </form>
+    
+    <div class="row w-100">
+        <div class="mb-3 col-12 col-lg-6 offset-lg-6">
+            <form action="/add-city" method="post" class="input-group ">
+                <input type="text" class="form-control" placeholder="enter city name" name="city">
+                <button class="btn btn-warning">Add</button>
+            </form>
 
-        </div>
-
-        
-            <div class="row col-12 col-lg-6 mb-3 w-100">
-                <div class="col col-12 col-lg-6 mb-3">
-                    <img class="col w-100" src="/images/map.png" alt="carte">
-
-                </div>
-        
-                <div class="col col-12 col-lg-6">
-                    <div class="text-center">
-                        <p class="d-inline-block">Update cities</p>
-                        <i class="fa-solid fa-rotate"></i>
-                    </div>
-
-                    <ul class="list-group w-100">
-
-                        <% if(typeof cityList !== "undefined" && cityList.length > 0 ) {%>
-
-                        <% for(let i=0; i<cityList.length ;i++){ %>
-                        <li class="list-group-item d-flex justify-content-between p-3">
-                            <div class="ms-2 text-start">
-                                <div class="fw-bold"> <%= cityList[i].name %> </div>
-                            </div>
-                            <div class="ms-2 d-flex justify-content-between align-items-center mw-50 gap-3">
-                                <p class="d-inline-block m-0"><%= cityList[i].info %> </p>
-                                <i class="<%= cityList[i].icon %>" ></i> 
-                                <span class="badge bg-warning rounded-pill"><%= cityList[i].tmax %> °C</span>
-                                <span class="badge bg-secondary rounded-pill"><%= cityList[i].tmin %> °C</span>
-                            </div>
-                            <div class="ms-2 text-end">
-                                <a href="/delete-city?index=<%=i%>"> <i class="fa-regular fa-circle-xmark text-warning"></i> </a>
-                            </div>
-                        </li>
-
-                    <%}%>
-                    <%}%>
-                     <%if(cityList.length === 0 ){%>
-                        <div class="text-center">
-                            <h6>No cities found</h6>
-                        </div>
-                        <%}%>
-                      
-                    </ul>
-            
             </div>
 
-
-        </div>
-                
     </div>
+            
+
+        
+    <div class="row mb-3 w-100">
+        <div class="col-12 col-lg-6 mb-3">
+            <img class="col w-100" src="/images/map.png" alt="carte">
+        </div>
+
+        <div class="col-12 col-lg-6">
+            <div class="text-center">
+                <p class="d-inline-block">Update cities</p>
+                <i class="fa-solid fa-rotate"></i>
+            </div>
+
+            <ul class="list-group w-100">
+
+                <% if(typeof cityList !== "undefined" && cityList.length > 0 ) {%>
+
+                <% for(let i=0; i<cityList.length ;i++){ %>
+                <li class="list-group-item d-flex justify-content-between p-3">
+                    <div class="ms-2 text-start">
+                        <div class="fw-bold"> <%= cityList[i].name %> </div>
+                    </div>
+                    <div class="ms-2 d-flex justify-content-between align-items-center mw-50 gap-3">
+                        <p class="d-inline-block m-0"><%= cityList[i].info %> </p>
+                        <i class="<%= cityList[i].icon %>" ></i> 
+                        <span class="badge bg-warning rounded-pill"><%= cityList[i].tmax %> °C</span>
+                        <span class="badge bg-secondary rounded-pill"><%= cityList[i].tmin %> °C</span>
+                    </div>
+                    <div class="ms-2 text-end">
+                        <a href="/delete-city?index=<%=i%>"> <i class="fa-regular fa-circle-xmark text-warning"></i> </a>
+                    </div>
+                </li>
+
+            <%}%>
+            <%}%>
+                <%if(cityList.length === 0 ){%>
+                <div class="text-center">
+                    <h6>No cities found</h6>
+                </div>
+                <%}%>
+                      
+             </ul>
+            
+        </div>
+
+
+    </div>
+                
+</div>
 
    
 
