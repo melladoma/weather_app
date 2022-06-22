@@ -24,10 +24,11 @@ router.get('/delete-city', function (req, res, next) {
 });
 
 router.post('/add-city', function (req, res, next) {
-
+  //requete API sur ville selon input post 
+  //aurait pu etre optimisee en ne lancant que sur les villes non exitantes dans le tableau ou existantes dans l'API
   var cityResult = request('GET', `https://api.openweathermap.org/data/2.5/weather?q=${req.body.city}&appid=74e78cd059bab6c7363618d5ebd7fe59&units=metric&lang=fr`)
   var dataApi = JSON.parse(cityResult.body)
-  let error
+
   if (dataApi.cod !== "404") {
     req.session.error = false;
     let city = {
@@ -49,7 +50,6 @@ router.post('/add-city', function (req, res, next) {
     }
 
   } else {
-    console.log("ville inconnue")
     req.session.error = true;
   }
   res.render('weather', { cityList: req.session.cityList, error: req.session.error });

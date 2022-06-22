@@ -26,7 +26,7 @@
     <div class="row w-100">
         <div class="mb-3 col-12 col-lg-6 offset-lg-6">
             <form action="/add-city" method="post" class="input-group ">
-                <input type="text" class="form-control" placeholder="enter city name" name="city">
+                <input type="text" class="form-control" placeholder="Enter city name" name="city">
                 <button class="btn btn-warning">Add</button>
             </form>
 
@@ -34,7 +34,6 @@
 
     </div>
             
-
         
     <div class="row mb-3 w-100">
         <div class="col-12 col-lg-6 mb-3">
@@ -56,9 +55,9 @@
                     <div class="text-middle ">
                         <p class="fw-bold m-0"> <%= cityList[i].name %> </p>
                     </div>
-                    <div class="d-flex justify-content-between align-items-center mw-50 gap-3">
+                    <div class="d-flex justify-content-between align-items-center mw-50 gap-2">
                         <p class="d-inline-block m-0"><%= cityList[i].info %> </p>
-                        <img src="<%= cityList[i].icon %>" style="width:36px;" >
+                        <img src="<%= cityList[i].icon %>" style="width:42px;" >
                         <span class="badge bg-warning rounded-pill"><%= cityList[i].tmax %> °C</span>
                         <span class="badge bg-secondary rounded-pill"><%= cityList[i].tmin %> °C</span>
                     </div>
@@ -92,34 +91,6 @@
                 
 </div>
 
-   
-
-             <!-- <div class="row col-12 col-lg-6 offset-lg-6">
-        <div class="card w-100">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">An item</li>
-              <li class="list-group-item">A second item</li>
-              <li class="list-group-item">A third item</li>
-            </ul>
-            <div class="card-footer">
-              Card footer
-            </div>
-          </div>
-
-
-    </div> -->
-
-
-
- 
-
-
-    
-
-        
-
-   
-   
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
