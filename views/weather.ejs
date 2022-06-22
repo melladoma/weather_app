@@ -41,9 +41,8 @@
         </div>
 
         <div class="col-12 col-lg-6">
-            <div class="text-center">
-                <p class="d-inline-block">Update cities</p>
-                <i class="fa-solid fa-rotate"></i>
+            <div class="text-center mb-2">
+                <a class="btn btn-outline-warning " href="/update">Update cities <i class="fa-solid fa-rotate"></i></a>
             </div>
 
             <ul class="list-group w-100">
@@ -62,7 +61,7 @@
                         <span class="badge bg-secondary rounded-pill"><%= cityList[i].tmin %> °C</span>
                     </div>
                     <div class="ms-2 text-end">
-                        <a href="/delete-city?index=<%=i%>"> <i class="fa-regular fa-circle-xmark text-warning"></i> </a>
+                        <a href="/delete-city?index=<%=i%>&name=<%=cityList[i].name%>"> <i class="fa-regular fa-circle-xmark text-warning"></i> </a>
                     </div>
                 </li>
 
