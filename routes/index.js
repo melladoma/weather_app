@@ -6,6 +6,7 @@ var CityModel = require('./bdd')
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
+
   res.render('login', {});
 });
 
@@ -47,6 +48,7 @@ router.get('/delete-city', async function (req, res, next) {
   await CityModel.deleteOne({ _id: citytoDelete._id });
   var cityList = await CityModel.find();
 
+
   res.render('weather', { cityList, error: req.session.error });
 });
 
@@ -55,6 +57,8 @@ router.post('/add-city', async function (req, res, next) {
   //aurait pu etre optimisee en ne lancant que sur les villes non exitantes dans le tableau ou existantes dans l'API
   var cityResult = request('GET', `https://api.openweathermap.org/data/2.5/weather?q=${req.body.city}&appid=74e78cd059bab6c7363618d5ebd7fe59&units=metric&lang=fr`)
   var dataApi = JSON.parse(cityResult.body)
+  var cityList;
+
 
   if (dataApi.cod !== "404") {
     req.session.error = false;
@@ -69,16 +73,16 @@ router.post('/add-city', async function (req, res, next) {
 
     var existingCity = await CityModel.findOne({ name: city.name })
 
-
     if (existingCity == null) {
       var citySaved = await city.save();
     }
-
-    var cityList = await CityModel.find();
+    cityList = await CityModel.find();
 
   } else {
+    cityList = await CityModel.find();
     req.session.error = true;
   }
+
   res.render('weather', { cityList, error: req.session.error });
 });
 

@@ -46,7 +46,7 @@
             </div>
 
             <ul class="list-group w-100">
-                
+
                 <% if(typeof cityList !== "undefined" && cityList.length > 0 ) {%>
 
                 <% for(let i=0; i<cityList.length ;i++){ %>
@@ -66,20 +66,17 @@
                 </li>
 
             <%}%>
-            <%}%>
-            <%if(error){%>
-                <div class="text-center">
-                    <h6 class="text-warning">City not found</h6>
-                </div>
-                <%}%>
-                
-                <%if(cityList.length === 0 && !error){%>
+            <%}else if(!error && cityList.length === 0 ){%>
                 <div class="text-center">
                     <h6 class="text-warning">No cities found</h6>
                 </div>
                 <%}%>
-
-
+                
+                <%if(error){%>
+                    <div class="text-center">
+                        <h6 class="text-warning">City not found</h6>
+                    </div>
+                    <%}%>
                       
              </ul>
             
