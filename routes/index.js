@@ -18,10 +18,15 @@ router.post('/sign-up', async function (req, res, next) {
     password: req.body.password,
   });
   var existingUser = await UserModel.findOne({ email: newUser.email })
-  if (existingUser == null) {
+  if (!existingUser) {
+    //instead of (existingUser === null)
     var userSaved = await newUser.save();
-    req.session.username = userSaved.username;
-    req.session.userId = userSaved._id;
+    req.session.user = {
+      username: userSaved.username,
+      userId: userSaved._id.toString(),
+    }
+    console.log(req.session.user)
+
     res.redirect('/weather');
   } else {
     res.redirect('/')
@@ -29,11 +34,16 @@ router.post('/sign-up', async function (req, res, next) {
 
 });
 
+//POST sign-in
 router.post('/sign-in', async function (req, res, next) {
   var existingUser = await UserModel.findOne({ email: req.body.email, password: req.body.password })
   if (existingUser !== null) {
-    req.session.username = existingUser.username;
-    req.session.userId = existingUser._id.toString();
+
+    req.session.user = {
+      username: existingUser.username,
+      userId: existingUser._id.toString(),
+    }
+
     res.redirect('/weather');
   } else {
     res.redirect('/')
@@ -41,15 +51,20 @@ router.post('/sign-in', async function (req, res, next) {
 });
 
 router.get('/logout', function (req, res, next) {
+  req.session.user = null;
+  console.log(req.session.user)
+
   res.redirect('/')
 });
 
 //GET cities page
 router.get('/weather', async function (req, res, next) {
   req.session.error = false;
-
-  var cityList = await CityModel.find();
-
+  if (req.session.user === null) {
+    res.redirect('/')
+  } else {
+    var cityList = await CityModel.find();
+  }
   res.render('weather', { cityList, error: req.session.error });
 });
 
