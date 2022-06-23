@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var request = require('sync-request')
-var CityModel = require('./bdd')
+var CityModel = require('../models/cities')
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
