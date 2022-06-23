@@ -1,11 +1,47 @@
 var express = require('express');
 var router = express.Router();
-var request = require('sync-request')
-var CityModel = require('../models/cities')
+var request = require('sync-request');
+var CityModel = require('../models/cities');
+var UserModel = require('../models/users');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.render('login', {});
+});
+
+//POST sign-up
+router.post('/sign-up', async function (req, res, next) {
+
+  var newUser = new UserModel({
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password,
+  });
+  var existingUser = await UserModel.findOne({ email: newUser.email })
+  if (existingUser == null) {
+    var userSaved = await newUser.save();
+    req.session.username = userSaved.username;
+    req.session.userId = userSaved._id;
+    res.redirect('/weather');
+  } else {
+    res.redirect('/')
+  }
+
+});
+
+router.post('/sign-in', async function (req, res, next) {
+  var existingUser = await UserModel.findOne({ email: req.body.email, password: req.body.password })
+  if (existingUser !== null) {
+    req.session.username = existingUser.username;
+    req.session.userId = existingUser._id.toString();
+    res.redirect('/weather');
+  } else {
+    res.redirect('/')
+  }
+});
+
+router.get('/logout', function (req, res, next) {
+  res.redirect('/')
 });
 
 //GET cities page
