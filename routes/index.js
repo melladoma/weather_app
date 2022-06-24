@@ -6,6 +6,7 @@ var UserModel = require('../models/users');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
+  console.log(req.session.user)
   res.render('login', {});
 });
 
@@ -60,7 +61,8 @@ router.get('/logout', function (req, res, next) {
 //GET cities page
 router.get('/weather', async function (req, res, next) {
   req.session.error = false;
-  if (req.session.user === null) {
+  console.log(req.session.user)
+  if (!req.session.user) {
     res.redirect('/')
   } else {
     var cityList = await CityModel.find();
