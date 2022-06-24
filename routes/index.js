@@ -84,6 +84,8 @@ router.post('/add-city', async function (req, res, next) {
       info: dataApi.weather[0].description,
       tmin: dataApi.main.temp_min,
       tmax: dataApi.main.temp_max,
+      lat: dataApi.coord.lat,
+      lon: dataApi.coord.lon,
     })
 
     var existingCity = await CityModel.findOne({ name: city.name })
@@ -123,6 +125,8 @@ router.get('/update', async function (req, res, next) {
         info: dataApi.weather[0].description,
         tmin: dataApi.main.temp_min,
         tmax: dataApi.main.temp_max,
+        lat: dataApi.coord.lat,
+        lon: dataApi.coord.lon,
       }
     )
   }

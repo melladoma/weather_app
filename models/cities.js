@@ -7,6 +7,8 @@ var CitySchema = mongoose.Schema({
     info: String,
     tmin: Number,
     tmax: Number,
+    lat: Number,
+    lon: Number,
 });
 
 var CityModel = mongoose.model('cities', CitySchema);
