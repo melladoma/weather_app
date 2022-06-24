@@ -45,6 +45,11 @@ crossorigin=""></script>
         <div class="col-12 col-lg-6 mb-3">
             <!-- <img class="col w-100" src="/images/map.png" alt="carte"> -->
             <div class="col w-100" id="worldmap"></div>
+            <form id="form" action="/get-city" method="POST" data-lat="" class="d-none">
+                <input id="cityLat" type="text" name ="" value="" >
+                <input id="cityLng" type="text" name ="" value="" >
+                <button>push</button>
+            </form>
         </div>
 
         <div class="col-12 col-lg-6">

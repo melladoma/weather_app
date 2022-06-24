@@ -53,3 +53,40 @@ for (let i = 0; i < cities.length; i++) {
     //version non custom
     var marker = L.marker([cityLat, cityLon]).addTo(map).bindPopup(cityName);
 }
+
+
+map.on('click', function (e) {
+    // var container = L.DomUtil.create('div'),
+    //     startBtn = createButton('Start from this location', container),
+    //     destBtn = createButton('Go to this location', container);
+
+    // L.popup()
+    //     .setContent(container)
+    //     .setLatLng(e.latlng)
+    //     .openOn(map);
+
+    // L.DomEvent.on(startBtn, 'click', function () {
+    //     control.spliceWaypoints(0, 1, e.latlng);
+    //     console.log(waypoints)
+    //     map.closePopup();
+    // });
+    // L.DomEvent.on(destBtn, 'click', function () {
+    //     console.log(control.getWaypoints())
+    //     control.spliceWaypoints(control.getWaypoints().length - 1, 1, e.latlng);
+    //     map.closePopup();
+    // });
+
+    let eventLat = e.latlng.lat;
+    let eventLng = e.latlng.lng;
+
+    document.getElementById('cityLat').setAttribute('name', 'eventLat')
+    document.getElementById('cityLat').setAttribute('value', eventLat)
+    document.getElementById('cityLng').setAttribute('name', 'eventLng')
+    document.getElementById('cityLng').setAttribute('value', eventLng)
+    document.getElementById('form').submit();
+
+
+
+
+    console.log(eventLat, eventLng)
+});

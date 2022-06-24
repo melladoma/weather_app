@@ -89,4 +89,12 @@ router.get('/update', async function (req, res, next) {
   res.render('weather', { cityList, error: req.session.error });
 });
 
+router.post('/get-city', async function (req, res, next) {
+  cityList = await CityModel.find();
+  console.log(req.body)
+  res.render('weather', { cityList, error: req.session.error });
+});
+
+
+
 module.exports = router;
