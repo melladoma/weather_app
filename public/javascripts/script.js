@@ -69,7 +69,7 @@ map.on('click', function (e) {
 
 
 
-    //VERSION GET not so ok
+    //VERSION GET/FETCH not so ok
     // let eventLat = e.latlng.lat;
     // let eventLng = e.latlng.lng;
     // fetch(`/get-city?eventLat=${eventLat.toFixed(4)}&eventLng=${eventLng.toFixed(4)}`)

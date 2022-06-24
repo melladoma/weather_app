@@ -90,6 +90,10 @@ router.get('/update', async function (req, res, next) {
   res.render('weather', { cityList, error: req.session.error });
 });
 
+
+
+// BONUS CLICK ON MAP TO ADD CITIES
+//POST VERSION(OK)
 router.post('/post-city', async function (req, res, next) {
   var geoResult = request('GET', `http://api.openweathermap.org/geo/1.0/reverse?lat=${req.body.eventLat}&lon=${req.body.eventLng}&limit=1&appid=74e78cd059bab6c7363618d5ebd7fe59`)
   var geoApi = JSON.parse(geoResult.body)
@@ -125,7 +129,8 @@ router.post('/post-city', async function (req, res, next) {
 
 });
 
-// version get + fetch
+// version get + fetch 
+//(NOT REALLY OK, FORCE RELOAD IN SCRIPT.js TO MAKE RENDER ALRIGHT)
 
 // router.get('/get-city', async function (req, res, next) {
 //   console.log(req.query)
@@ -162,8 +167,6 @@ router.post('/post-city', async function (req, res, next) {
 //   res.render('weather', { cityList, error: req.session.error });
 //   // res.send('weather');
 // });
-
-
 
 
 module.exports = router;
