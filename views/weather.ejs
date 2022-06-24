@@ -9,9 +9,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
    integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
    crossorigin=""/>
-   <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
-integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
-crossorigin=""></script>
+   
    <link rel="stylesheet" href="/stylesheets/style.css">
     <title>WeatherApp</title>
 </head>
@@ -45,7 +43,7 @@ crossorigin=""></script>
         <div class="col-12 col-lg-6 mb-3">
             <!-- <img class="col w-100" src="/images/map.png" alt="carte"> -->
             <div class="col w-100" id="worldmap"></div>
-            <form id="form" action="/get-city" method="POST" data-lat="" class="d-none">
+            <form id="form" action="/post-city" method="POST" data-lat="" class="d-none">
                 <input id="cityLat" type="text" name ="" value="" >
                 <input id="cityLng" type="text" name ="" value="" >
                 <button>push</button>
@@ -99,6 +97,9 @@ crossorigin=""></script>
                 
 </div>
 
+<script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+crossorigin=""></script>
     <script src="/javascripts/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

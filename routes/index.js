@@ -12,6 +12,7 @@ router.get('/', function (req, res, next) {
 
 //GET cities page
 router.get('/weather', async function (req, res, next) {
+
   req.session.error = false;
   console.log(req.session.user)
   if (!req.session.user) {
@@ -89,11 +90,79 @@ router.get('/update', async function (req, res, next) {
   res.render('weather', { cityList, error: req.session.error });
 });
 
-router.post('/get-city', async function (req, res, next) {
-  cityList = await CityModel.find();
-  console.log(req.body)
+router.post('/post-city', async function (req, res, next) {
+  var geoResult = request('GET', `http://api.openweathermap.org/geo/1.0/reverse?lat=${req.body.eventLat}&lon=${req.body.eventLng}&limit=1&appid=74e78cd059bab6c7363618d5ebd7fe59`)
+  var geoApi = JSON.parse(geoResult.body)
+
+  var cityResult = request('GET', `https://api.openweathermap.org/data/2.5/weather?q=${geoApi[0].name}&appid=74e78cd059bab6c7363618d5ebd7fe59&units=metric&lang=fr`)
+  var dataApi = JSON.parse(cityResult.body)
+
+  if (dataApi.cod !== "404") {
+    req.session.error = false;
+
+    var city = new CityModel({
+      name: dataApi.name,
+      icon: `http://openweathermap.org/img/wn/${dataApi.weather[0].icon}@2x.png`,
+      info: dataApi.weather[0].description,
+      tmin: dataApi.main.temp_min,
+      tmax: dataApi.main.temp_max,
+      lat: dataApi.coord.lat,
+      lon: dataApi.coord.lon,
+    })
+
+    var existingCity = await CityModel.findOne({ name: city.name })
+    if (existingCity == null) {
+      var citySaved = await city.save();
+    }
+    var cityList = await CityModel.find();
+
+  } else {
+    cityList = await CityModel.find();
+    req.session.error = true;
+  }
+  console.log(cityList)
   res.render('weather', { cityList, error: req.session.error });
+
 });
+
+// version get + fetch
+
+// router.get('/get-city', async function (req, res, next) {
+//   console.log(req.query)
+//   var geoResult = request('GET', `http://api.openweathermap.org/geo/1.0/reverse?lat=${req.query.eventLat}&lon=${req.query.eventLng}&limit=1&appid=74e78cd059bab6c7363618d5ebd7fe59`)
+//   var geoApi = JSON.parse(geoResult.body)
+
+//   var cityResult = request('GET', `https://api.openweathermap.org/data/2.5/weather?q=${geoApi[0].name}&appid=74e78cd059bab6c7363618d5ebd7fe59&units=metric&lang=fr`)
+//   var dataApi = JSON.parse(cityResult.body)
+
+//   if (dataApi.cod !== "404") {
+//     req.session.error = false;
+
+//     var city = new CityModel({
+//       name: dataApi.name,
+//       icon: `http://openweathermap.org/img/wn/${dataApi.weather[0].icon}@2x.png`,
+//       info: dataApi.weather[0].description,
+//       tmin: dataApi.main.temp_min,
+//       tmax: dataApi.main.temp_max,
+//       lat: dataApi.coord.lat,
+//       lon: dataApi.coord.lon,
+//     })
+
+//     var existingCity = await CityModel.findOne({ name: city.name })
+//     if (existingCity == null) {
+//       var citySaved = await city.save();
+//     }
+//     var cityList = await CityModel.find();
+
+//   } else {
+//     cityList = await CityModel.find();
+//     req.session.error = true;
+//   }
+//   console.log(cityList)
+//   res.render('weather', { cityList, error: req.session.error });
+//   // res.send('weather');
+// });
+
 
 
 

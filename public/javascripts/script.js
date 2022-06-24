@@ -56,37 +56,35 @@ for (let i = 0; i < cities.length; i++) {
 
 
 map.on('click', function (e) {
-    // var container = L.DomUtil.create('div'),
-    //     startBtn = createButton('Start from this location', container),
-    //     destBtn = createButton('Go to this location', container);
 
-    // L.popup()
-    //     .setContent(container)
-    //     .setLatLng(e.latlng)
-    //     .openOn(map);
-
-    // L.DomEvent.on(startBtn, 'click', function () {
-    //     control.spliceWaypoints(0, 1, e.latlng);
-    //     console.log(waypoints)
-    //     map.closePopup();
-    // });
-    // L.DomEvent.on(destBtn, 'click', function () {
-    //     console.log(control.getWaypoints())
-    //     control.spliceWaypoints(control.getWaypoints().length - 1, 1, e.latlng);
-    //     map.closePopup();
-    // });
-
+    // version post (test ok)
     let eventLat = e.latlng.lat;
     let eventLng = e.latlng.lng;
 
     document.getElementById('cityLat').setAttribute('name', 'eventLat')
-    document.getElementById('cityLat').setAttribute('value', eventLat)
+    document.getElementById('cityLat').setAttribute('value', eventLat.toFixed(4))
     document.getElementById('cityLng').setAttribute('name', 'eventLng')
-    document.getElementById('cityLng').setAttribute('value', eventLng)
+    document.getElementById('cityLng').setAttribute('value', eventLng.toFixed(4))
     document.getElementById('form').submit();
 
 
 
-
-    console.log(eventLat, eventLng)
+    //VERSION GET not so ok
+    // let eventLat = e.latlng.lat;
+    // let eventLng = e.latlng.lng;
+    // fetch(`/get-city?eventLat=${eventLat.toFixed(4)}&eventLng=${eventLng.toFixed(4)}`)
+    //     .then(function (response) {
+    //         console.log(response)
+    //         let cities = document.getElementsByClassName('city');
+    //         console.log(cities.length);
+    //         // for (let i = 0; i < cities.length; i++) {
+    //         //     let cityLat = cities[i].dataset.lat;
+    //         //     let cityLon = cities[i].dataset.lon;
+    //         //     let cityName = cities[i].dataset.name;
+    //         //     var marker = L.marker([cityLat, cityLon]).addTo(map).bindPopup(cityName);
+    //         //     console.log("marker lat " + cityLat);
+    //         // }
+    //         location.reload();
+    //     })
+    //     .catch(e => console.error('Boo...' + e));
 });
