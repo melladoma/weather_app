@@ -1,16 +1,14 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var options = {
+const env = require("../env")
+
+const options = {
     connectTimeoutMS: 5000,
     useNewUrlParser: true,
     useUnifiedTopology: true
 }
 
-var user = 'admin';
-var password = 'adminpwd';
-var bddname = 'weatherapp';
-
-mongoose.connect(`mongodb+srv://${user}:${password}@cluster0.wsfgl.mongodb.net/${bddname}?retryWrites=true&w=majority`,
+mongoose.connect(env.bdd_connection_string,
     options,
     function (err) {
         console.log(err);

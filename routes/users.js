@@ -16,7 +16,6 @@ router.post('/sign-up', async function (req, res, next) {
   });
   var existingUser = await UserModel.findOne({ email: newUser.email })
   if (!existingUser) {
-    //instead of (existingUser === null)
     var userSaved = await newUser.save();
     req.session.user = {
       username: userSaved.username,
