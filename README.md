@@ -8,7 +8,7 @@ Users credentials verification and validation is performed upon sign-in.
 Cities can be added to the displayed results via search bar or by clicking on the map.
 Their city list is kept through navigation thanks to sessions variables mecanism.
 
-## Stack:
+## Stack
 
 - Node
 - Express (MVC architecture)
